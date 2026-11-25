@@ -16,6 +16,8 @@ description: 把本地项目或一批改动安全地传到 GitHub 并开 PR/直�
 
 ## 第一步：体检
 
+> 下文命令里的 `python` 按你机器上的解释器替换（`python` / `python3` / `py -3`）；脚本只用标准库，不需要装依赖。
+
 ```bash
 python scripts/preflight.py --repo-dir <项目目录>
 ```

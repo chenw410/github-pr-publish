@@ -205,7 +205,7 @@ def main():
     report["info"].update({"github_443": direct, "api_443": api, "listening_ports": open_ports,
                            "git_direct": direct_git, "git_direct_err": direct_err,
                            "proxy": proxy, "git_via_proxy": proxy_git, "proxy_err": proxy_err})
-    if not proxy:
+    if proxy is None:
         report["problems"].append("git 连不上 github.com（直连与代理都不通）：%s" % (
             (direct_err or proxy_err or ["未知错误"])[0][:160]))
 
@@ -235,7 +235,7 @@ def main():
         print("github.com:443: %s   api.github.com:443: %s（socket，仅供参考）" % (direct, api))
         print("git 直连      : %s" % ("通" if direct_git else "不通｜%s" % ((direct_err or ["-"])[0][:100])))
         print("本机代理端口  : %s" % (open_ports or "无"))
-        print("将使用代理    : %s" % (proxy if proxy else "无可用通路"))
+        print("将使用代理    : %s" % ("直连" if proxy == "" else (proxy or "无可用通路")))
         print("凭据          : %s" % ("已授权（%s，令牌 %d 位）" % (user, tlen) if ok else "无"))
         print("待提交文件    : %d 个" % len(files))
         if risks:
