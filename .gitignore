@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 本地运行产物
+*.log
+*.pid
+*.db
+*.db-*
+.DS_Store
+Thumbs.db
+
+# 本地克隆/临时目录
+tmp/

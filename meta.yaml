@@ -1,0 +1,24 @@
+name: 上传 GitHub 并提 PR
+type: skill
+owner: 陈王（chenw410）
+department: 财务数字化
+summary: 把本地项目或改动安全传到 GitHub 并开 PR：代理探测、敏感数据体检、白名单同步、无 gh 也能建 PR、CI 失败定位。
+tags:
+  - GitHub
+  - PR
+  - 发布
+  - 研发提效
+maturity: experimental
+published: 2026-11-25
+updated: 2026-11-25
+usage: |
+  1. 装到 ~/.agents/skills/github-pr-publish（clone 或复制整个目录）。
+  2. 在项目目录跑 scripts/preflight.py --repo-dir .：看 git 是否可用、直连/代理是否通、凭据是否已授权、待提交文件有没有 db/xlsx/密钥。
+  3. 目录没有 .git 时先 clone 目标仓库到 tmp，用 scripts/diff_tree.py 出「只在本地 / 只在远程 / 内容不同」三张清单，按白名单同步，远程更新的文件保留。
+  4. 在克隆里建分支、按仓库历史作者设提交身份，commit -F 提交、加代理 push。
+  5. 没有 gh 时用 scripts/open_pr.py 调 API 开 PR（凭据取自 git credential，不落盘）。
+  6. 用 scripts/ci_watch.py 等 CI，失败自动拉 job 日志尾部定位；不代用户合并。
+requires:
+  - git（已配置 GitHub 凭据）
+secrets: []
+links: {}
